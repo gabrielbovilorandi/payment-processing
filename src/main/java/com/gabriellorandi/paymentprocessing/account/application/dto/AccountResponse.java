@@ -1,12 +1,15 @@
 package com.gabriellorandi.paymentprocessing.account.application.dto;
 
 import com.gabriellorandi.paymentprocessing.account.domain.Account;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class AccountResponse {
 
