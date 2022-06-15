@@ -14,6 +14,18 @@ create table `operation_type`
     primary key (id)
 );
 
+create table transaction
+(
+    id           uuid      not null,
+    account_id   uuid      not null,
+    operation_id integer   not null,
+    amount       decimal   not null,
+    `event_date` timestamp not null,
+    primary key (id),
+    foreign key (account_id) references `account` (id),
+    foreign key (operation_id) references `operation_type` (id)
+);
+
 insert into operation_type
 values (1, 'COMPRA A VISTA');
 insert into operation_type
