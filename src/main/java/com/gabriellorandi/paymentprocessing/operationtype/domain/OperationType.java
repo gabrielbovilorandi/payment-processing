@@ -17,7 +17,7 @@ public class OperationType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
+    @Column(name = "description")
     private String description;
 
 }

@@ -3,6 +3,7 @@ package com.gabriellorandi.paymentprocessing.account.domain;
 import com.gabriellorandi.paymentprocessing.account.application.dto.CreateAccountRequest;
 import com.gabriellorandi.paymentprocessing.common.enums.Status;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -19,14 +20,15 @@ public class Account {
     @GeneratedValue
     private UUID id;
 
-    @Column
+    @Column(name = "document_number")
     @Size(min = 11, max = 11)
     private String documentNumber;
 
-    @Column
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
 
