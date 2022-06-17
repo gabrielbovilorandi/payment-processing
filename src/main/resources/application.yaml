@@ -18,3 +18,7 @@ spring:
       hibernate:
         show_sql: true
         format_sql: false
+
+# Caching
+cache:
+  expiration-time: 60   # in seconds. Default is 1 min.

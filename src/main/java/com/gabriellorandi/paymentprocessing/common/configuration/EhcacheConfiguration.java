@@ -6,6 +6,7 @@ import org.ehcache.config.builders.CacheConfigurationBuilder;
 import org.ehcache.config.builders.ExpiryPolicyBuilder;
 import org.ehcache.config.builders.ResourcePoolsBuilder;
 import org.ehcache.jsr107.Eh107Configuration;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,6 +18,9 @@ import java.time.Duration;
 @Configuration
 public class EhcacheConfiguration {
 
+    @Value("${cache.expiration-time:60}")
+    private int expirationTime;
+
     @Bean
     public CacheManager EhcacheManager() {
 
@@ -27,7 +31,7 @@ public class EhcacheConfiguration {
                         ResourcePoolsBuilder
                                 .heap(10)
                                 .build())
-                .withExpiry(ExpiryPolicyBuilder.timeToIdleExpiration(Duration.ofSeconds(10)))
+                .withExpiry(ExpiryPolicyBuilder.timeToIdleExpiration(Duration.ofSeconds(expirationTime)))
                 .build();
 
         CachingProvider cachingProvider = Caching.getCachingProvider();
