@@ -32,7 +32,7 @@ cache:
 
 # How to run?
 
-You can run this project in different ways:
+This project can be run in different ways:
 
 ### Docker
 
@@ -45,7 +45,7 @@ Or simply using the **docker pull** command:
 docker pull gabriellorandi96/payment-processing
 ```
 
-And run the command:
+And run the command below do execute it:
 
 ```
 docker run -p 8080:8080 gabriellorandi96/payment-processing:latest
@@ -59,13 +59,13 @@ Requirements:
 - Maven
 - A Java IDE
 
-The project should be imported as **maven project** from your IDE, and then run.
+The project should be imported as **maven project**, and then run.
 
 ---
 
 # Using the API
 
-With the project running locally, the swagger-ui Api Documentation can be accessed on: <http:localhost:8080/swagger-ui/>
+With the project running locally, the swagger-ui Api Documentation's can be accessed on: <http:localhost:8080/swagger-ui/>
 
 ![Swagger Api image](./images/swagger_ui.png)
 
@@ -172,8 +172,7 @@ mvn compile jib:build
 There is a known [issue](https://github.com/springfox/springfox/issues/2623)
 with Swagger trying to deserialize Pageable entity.
 
-The workaround was creating an annotation that configures the pagination attributes of Swagger and uses it together
-with @ApiIgnore annotation to ignore the Pageable attributes.
+The workaround was creating an annotation that configures the pagination attributes of Swagger, and using the annotation @ApiIgnore to ignore the Pageable attributes.
 
 ApiPageable interface:
 
