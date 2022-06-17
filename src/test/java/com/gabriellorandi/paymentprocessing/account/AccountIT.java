@@ -84,7 +84,6 @@ public class AccountIT {
         mockMvc.perform(requestBuilder)
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.details[0]", containsString(expectedErrorMessage)));
-        ;
     }
 
 }
