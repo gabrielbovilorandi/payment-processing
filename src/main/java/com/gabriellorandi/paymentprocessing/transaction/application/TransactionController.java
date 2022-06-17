@@ -3,7 +3,7 @@ package com.gabriellorandi.paymentprocessing.transaction.application;
 import com.gabriellorandi.paymentprocessing.account.repository.AccountRepository;
 import com.gabriellorandi.paymentprocessing.common.application.annotation.ApiPageable;
 import com.gabriellorandi.paymentprocessing.common.application.response.ApiCollectionResponse;
-import com.gabriellorandi.paymentprocessing.operationtype.repository.OperationTypeRepository;
+import com.gabriellorandi.paymentprocessing.operationtype.service.OperationTypeCacheService;
 import com.gabriellorandi.paymentprocessing.transaction.application.dto.CreateTransactionRequest;
 import com.gabriellorandi.paymentprocessing.transaction.application.dto.TransactionResponse;
 import com.gabriellorandi.paymentprocessing.transaction.domain.Transaction;
@@ -33,7 +33,7 @@ public class TransactionController {
 
     private final TransactionRepository transactionRepository;
     private final AccountRepository accountRepository;
-    private final OperationTypeRepository operationTypeRepository;
+    private final OperationTypeCacheService operationTypeCacheService;
 
     @GetMapping
     @ApiPageable
@@ -79,7 +79,7 @@ public class TransactionController {
     public ResponseEntity<TransactionResponse> create(@RequestBody @Valid CreateTransactionRequest request) {
         log.info("Receiving request to create new transaction.");
 
-        Transaction newTransaction = Transaction.from(request, accountRepository, operationTypeRepository);
+        Transaction newTransaction = Transaction.from(request, accountRepository, operationTypeCacheService);
         transactionRepository.save(newTransaction);
 
         log.info("Transaction created. Id: {}.", newTransaction.getId());

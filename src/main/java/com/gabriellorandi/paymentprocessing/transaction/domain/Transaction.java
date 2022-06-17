@@ -3,7 +3,7 @@ package com.gabriellorandi.paymentprocessing.transaction.domain;
 import com.gabriellorandi.paymentprocessing.account.domain.Account;
 import com.gabriellorandi.paymentprocessing.account.repository.AccountRepository;
 import com.gabriellorandi.paymentprocessing.operationtype.domain.OperationType;
-import com.gabriellorandi.paymentprocessing.operationtype.repository.OperationTypeRepository;
+import com.gabriellorandi.paymentprocessing.operationtype.service.OperationTypeCacheService;
 import com.gabriellorandi.paymentprocessing.transaction.application.dto.CreateTransactionRequest;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -42,11 +42,11 @@ public class Transaction {
     private ZonedDateTime eventDate;
 
     public static Transaction from(CreateTransactionRequest createTransactionRequest, AccountRepository accountRepository,
-                                   OperationTypeRepository operationTypeRepository) {
+                                   OperationTypeCacheService operationTypeCacheService) {
         return new Transaction(
                 null,
                 accountRepository.findById(createTransactionRequest.getAccountId()).orElse(null),
-                operationTypeRepository.findById(createTransactionRequest.getOperationTypeId()).orElse(null),
+                operationTypeCacheService.findById(createTransactionRequest.getOperationTypeId()),
                 createTransactionRequest.getAmount(),
                 ZonedDateTime.now()
         );
